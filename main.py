@@ -10,6 +10,7 @@ screen.tracer(0)
 
 player = Player()
 scoreboard = Scoreboard()
+acceleration = 5
 
 cars = []
 
@@ -23,7 +24,7 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
     if turns % 6 == 0:
-        car_manager = CarManager()
+        car_manager = CarManager(acceleration)
         cars.append(car_manager)
     for car in cars:
         car.car_move()
@@ -32,9 +33,11 @@ while game_is_on:
             scoreboard.game_over()
             game_is_on = False
     if player.ycor() > 280:
-        car_manager.acceleration()
+        acceleration += 5
         player.goto(0, -280)
         scoreboard.clear()
         scoreboard.new_level()
-
+    if turns % 240 == 0:
+        cars = cars[30:]
+    print(len(cars))
 screen.exitonclick()
