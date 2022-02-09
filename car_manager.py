@@ -7,7 +7,7 @@ MOVE_INCREMENT = 5
 
 class CarManager(Turtle):
 
-    def __init__(self):
+    def __init__(self, speed):
         super().__init__()
         self.penup()
         self.shape("square")
@@ -15,8 +15,8 @@ class CarManager(Turtle):
         self.shapesize(stretch_wid=1, stretch_len=2)
         self.car_generate()
         self.car_color()
-        self.speed = STARTING_MOVE_DISTANCE
-        self.car_move()
+        self.speed = speed
+
 
 
     def car_generate(self):
@@ -31,7 +31,3 @@ class CarManager(Turtle):
         color = random.choice(COLORS)
         return color
 
-    def acceleration(self):
-        self.speed += MOVE_INCREMENT
-        self.car_move()
-        print(self.speed)
